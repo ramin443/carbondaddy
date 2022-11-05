@@ -8,6 +8,7 @@ import 'package:gogreen/constants/font_constants.dart';
 import 'package:gogreen/datamodels/indiv_task.dart';
 
 class HomeController extends GetxController {
+  List<String> days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun",];
   List<TaskModel> tasks = [
     TaskModel(
         "assets/images/changeorglogo.png",
@@ -474,7 +475,8 @@ class HomeController extends GetxController {
     return Container(
       width: screenwidth*0.841,
       height: screenwidth*0.405,
-      padding: EdgeInsets.only(top: screenwidth*0.0282,bottom: screenwidth*0.0282),
+      padding: EdgeInsets.only(top: screenwidth*0.0282,bottom: screenwidth*0.0282,
+          left: screenwidth*0.0509),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(6)),
         color: Colors.white,
@@ -495,31 +497,45 @@ class HomeController extends GetxController {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              oneprogressbar(context),
+              oneprogressbar(context,index),
             ],
           );
         }),
       ),
     );
   }
-  Widget oneprogressbar(BuildContext context){
+  Widget oneprogressbar(BuildContext context,int index){
     double screenwidth=MediaQuery.of(context).size.width;
     return Container(
-      height: screenwidth*0.309,
-      margin: EdgeInsets.only(bottom: screenwidth*0.0169,right: screenwidth*0.063),
+      height: screenwidth*0.495,
+      margin: EdgeInsets.only(bottom: screenwidth*0.0169,right: screenwidth*0.048),
       child: Column(
         children: [
           Container(
-            height: screenwidth*0.309,
+            height: screenwidth*0.259,
             width: screenwidth*0.018,
             decoration: BoxDecoration(
               color: Color(0xffEFEFEF),
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  height: screenwidth*0.159,
+                  width: screenwidth*0.018,
+                  decoration: BoxDecoration(
+                    color: Color(0xffF5A491),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                )
+              ],
+            ),
           ),
           Container(
+            margin:EdgeInsets.only(top: screenwidth*0.0169),
             child: Text(
-              "Mon",
+              days[index],
               textAlign: TextAlign.start,
               style: TextStyle(
                   fontFamily: eudoxussansmedium,
