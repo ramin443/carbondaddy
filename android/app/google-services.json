@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "990550463074",
+    "project_id": "green-project-bf011",
+    "storage_bucket": "green-project-bf011.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990550463074:android:58f67f93e77bfbb360b73b",
+        "android_client_info": {
+          "package_name": "com.ramin.gogreen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990550463074-gv7t55p2r28so631crc5co6nk2kkbshm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClLdqmQ7dBAoM4XucucB5CVTd3GfmMqKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990550463074-gv7t55p2r28so631crc5co6nk2kkbshm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "990550463074-d0qqrqe1k6u16jqkptgnuv44tfqr545k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ramin.gogreen"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
