@@ -36,6 +36,7 @@ dependencies:
   email_validator: ^2.0.1
   feather_icons: ^1.1.0-nullsafety.0
   flutter_svg: ^0.22.0
+  sleek_circular_slider: ^2.0.1
 
 
 dev_dependencies:
@@ -64,6 +65,19 @@ flutter:
   assets:
     - assets/images/Desk_duotone_line.svg
     - assets/images/Arhive_light.svg
+    - assets/images/carbondad logo.svg
+    - assets/images/icons/homeicon.svg
+    - assets/images/icons/seall.svg
+    - assets/images/changeorglogo.png
+    - assets/images/attachment.jpeg
+    - assets/images/icons/viewmore.svg
+    - assets/images/avatars/mommy3.jpg
+    - assets/images/icons/findmore.svg
+    - assets/images/avatars/Group 33.png
+    - assets/images/avatars/daddy1.jpg
+    - assets/images/icons/divider.svg
+    - assets/images/icons/fullprogressreport.svg
+    - assets/images/icons/aboutthem.svg
     # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
@@ -113,7 +127,23 @@ flutter:
     - family: Sfproroundedsemi
       fonts:
         - asset: fonts/FontsFree-Net-SF-Pro-Rounded-Semibold.ttf
-  # fonts:
+    - family: Sfproroundedsemi
+      fonts:
+        - asset: fonts/FontsFree-Net-SF-Pro-Rounded-Semibold.ttf
+    - family: Eudoxussanslight
+      fonts:
+        - asset: fonts/EudoxusSans-Light.ttf
+    - family: Eudoxussansmedium
+      fonts:
+        - asset: fonts/EudoxusSans-Medium.ttf
+    - family: Eudoxussansregular
+      fonts:
+        - asset: fonts/EudoxusSans-Regular.ttf
+    - family: Eudoxussansbold
+      fonts:
+        - asset: fonts/EudoxusSans-Bold.ttf
+
+          # fonts:
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

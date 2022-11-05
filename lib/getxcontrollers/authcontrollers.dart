@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gogreen/constants/color_constants.dart';
 
 import '../constants/font_constants.dart';
 import '../screens/login.dart';
@@ -11,6 +13,8 @@ import '../screens/signup.dart';
 
 class AuthController extends GetxController{
   TextEditingController emailcontroller=TextEditingController();
+  TextEditingController fullnamecontroller=TextEditingController();
+  TextEditingController gendercontroller=TextEditingController();
   TextEditingController passwordcontroller=TextEditingController();
   TextEditingController loginemailcontroller=TextEditingController();
   TextEditingController loginpasswordcontroller=TextEditingController();
@@ -20,6 +24,22 @@ class AuthController extends GetxController{
   String autherror="";
   String signuperrormsg="";
   bool showerror=false;
+  int genderindex=0;
+  List<String> genders=["Male","Female","Others"];
+
+  void setgenderindex(int selectindex){
+    genderindex=selectindex;
+    update();
+  }
+  void addusercollection({String? fullname, String? email, int? genderindex})async{
+   String usertype=genderindex==0?"CarbonDad":genderindex==1?"CarbonMom":"CarbonDad";
+    await FirebaseFirestore.instance.collection("Users").doc(email).set({
+      "fullname":fullname,
+      "email":email,
+      "gender": genders[genderindex!],
+      "type":usertype
+    });
+  }
   loginwithemail(BuildContext context,String email, String password)async{
     if(EmailValidator.validate(email) && loginpasswordcontroller.text.length>7){
       loginerrormsg="";
@@ -43,7 +63,7 @@ class AuthController extends GetxController{
       update();
     }
   }
-  signupwithemail(BuildContext context,String email, String password)async{
+  signupwithemail(BuildContext context,String name, int gender,String email, String password)async{
     if(EmailValidator.validate(email) && passwordcontroller.text.length>7){
       signuperrormsg="";
       autherror="";
@@ -58,6 +78,7 @@ class AuthController extends GetxController{
         // err.printInfo();
         //  print(err.printInfo());
       });
+      addusercollection(fullname: name,genderindex: gender,email: email);
     }else if(EmailValidator.validate(email) !=true){
       signuperrormsg="Please enter a valid email address";
       update();
@@ -91,6 +112,176 @@ class AuthController extends GetxController{
                         margin: EdgeInsets.only(
                             left: screenwidth*0.021,bottom: screenwidth*0.024,
                             top: screenwidth*0.0853),
+                        child: Text("Full Name",style: TextStyle(
+                            fontFamily: intermedium,
+                            color: Color(0xff656565),
+                            fontSize: screenwidth*0.032
+                        ),),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          //         horizontal: 24
+                          left: screenwidth*0.04,
+                          //     right: screenwidth*0.04
+
+                        ),
+                        //      height: 46,
+                        height: screenwidth*0.096,
+                        width: screenwidth,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color(0xffECECEC),
+                            width: 1,
+                          ),
+                          color: Colors.white.withOpacity(0.85),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Center(
+                          child: TextFormField(
+
+                            controller: fullnamecontroller,
+                            cursorColor: Colors.black87,
+                            style: TextStyle(
+                                fontFamily: interregular,
+                                color: Colors.black87,
+                                //       fontSize: 13.5
+                                fontSize: screenwidth*0.0328
+                            ),
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            decoration: InputDecoration(
+                              suffixIcon: Icon(FeatherIcons.user,
+                                color: Color(0xff404d4d),
+                                //                 size: 18,
+                                size: screenwidth*0.0437,
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Robert Fox',
+                              hintStyle: TextStyle(
+                                  fontFamily: interregular,
+                                  color: Color(0xffB5B5B5)
+                              ),
+
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: screenwidth*0.021,bottom: screenwidth*0.034,
+                            top: screenwidth*0.0653),
+                        child: Text("Gender",style: TextStyle(
+                            fontFamily: intermedium,
+                            color: Color(0xff656565),
+                            fontSize: screenwidth*0.032
+                        ),),
+                      ),
+                      Container(
+                        width: screenwidth,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap:(){
+                                      setgenderindex(0);
+                                      },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          height: screenwidth*0.032,
+                                          width: screenwidth*0.032,
+                                          margin: EdgeInsets.only(left:screenwidth*0.02 ),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color:genderindex==0?exohealgreen: Color(0xff989898),width: 1,),
+                                            color: genderindex==0?exohealgreen:Colors.transparent,
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: screenwidth*0.0253),
+                                          child: Text("Male",style: TextStyle(
+                                            fontFamily: interregular,
+                                            color: genderindex==0?exohealgreen:Color(0xffB5B5B5),
+
+                                          ),),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+
+                                  GestureDetector(
+                                    onTap:(){
+                                      setgenderindex(1);
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          height: screenwidth*0.032,
+                                          width: screenwidth*0.032,
+                                          margin: EdgeInsets.only(left: screenwidth*0.0826),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(color: genderindex==1?exohealgreen:Color(0xff989898),width: 1,),
+                                            color: genderindex==1?exohealgreen:Colors.transparent
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: screenwidth*0.0253),
+                                          child: Text("Female",style: TextStyle(
+                                            fontFamily: interregular,
+                                            color: genderindex==1?exohealgreen:Color(0xffB5B5B5),
+                                          ),),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+
+                                  GestureDetector(
+                                    onTap:(){
+                                      setgenderindex(2);
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          height: screenwidth*0.032,
+                                          width: screenwidth*0.032,
+                                          margin: EdgeInsets.only(left: screenwidth*0.0826),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(color:  genderindex==2?exohealgreen:Color(0xff989898),width: 1,),
+                                            color:  genderindex==2?exohealgreen:Colors.transparent
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: screenwidth*0.0253),
+                                          child: Text("Others",style: TextStyle(
+                                            fontFamily: interregular,
+                                            color:  genderindex==2?exohealgreen:Color(0xffB5B5B5),
+
+                                          ),),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: screenwidth*0.021,bottom: screenwidth*0.024,
+                            top: screenwidth*0.0653),
                         child: Text("Email Address",style: TextStyle(
                             fontFamily: intermedium,
                             color: Color(0xff656565),
@@ -126,7 +317,7 @@ class AuthController extends GetxController{
                                 //       fontSize: 13.5
                                 fontSize: screenwidth*0.0328
                             ),
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
                               suffixIcon: Icon(FeatherIcons.user,
@@ -262,7 +453,7 @@ class AuthController extends GetxController{
             ),
             GestureDetector(
               onTap: (){
-                signupwithemail(context,emailcontroller.text, passwordcontroller.text);
+                signupwithemail(context,fullnamecontroller.text,genderindex,emailcontroller.text, passwordcontroller.text);
               },
               child: Container(
                 margin: EdgeInsets.only(top: screenwidth*0.106),
@@ -295,7 +486,7 @@ class AuthController extends GetxController{
                     ),
                     GestureDetector(
                       onTap: (){
-                        signupwithemail(context,emailcontroller.text, passwordcontroller.text);
+                        signupwithemail(context,fullnamecontroller.text,genderindex,emailcontroller.text, passwordcontroller.text);
                       },
                       child: Icon(CupertinoIcons.arrow_right,
                         color: Color(0xffECECEC),

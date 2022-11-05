@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gogreen/screens/base/base.dart';
+import 'package:gogreen/screens/initial/splash_screen.dart';
 import 'package:gogreen/screens/login.dart';
 import 'package:gogreen/screens/signup.dart';
 
@@ -18,12 +19,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Carbon Daddy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SignUp(),
+      home: SplashScreen(),
       routes: <String, WidgetBuilder>{
         '/SignUp': (BuildContext context) => SignUp(),
         '/Login': (BuildContext context) => Login(),
