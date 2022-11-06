@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gogreen/screens/avatar/select_female.dart';
+import 'package:gogreen/screens/avatar/select_male.dart';
 import 'package:gogreen/screens/base/base.dart';
 import 'package:gogreen/screens/initial/splash_screen.dart';
 import 'package:gogreen/screens/login.dart';
+import 'package:gogreen/screens/memesurvey/survey_base.dart';
 import 'package:gogreen/screens/signup.dart';
 
 void main() async{
@@ -29,6 +32,9 @@ class MyApp extends StatelessWidget {
         '/SignUp': (BuildContext context) => SignUp(),
         '/Login': (BuildContext context) => Login(),
         '/Base': (BuildContext context) => Base(),
+        '/SurveyPage': (BuildContext context) => SurveyBase(),
+        '/MaleAvatar': (BuildContext context) => SelectMale(),
+        '/FemaleAvatar': (BuildContext context) => SelectFemale(),
       },
     );
   }

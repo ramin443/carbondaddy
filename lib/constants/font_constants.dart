@@ -14,3 +14,5 @@ String eudoxussanslight="Eudoxussanslight";
 String eudoxussansregular="Eudoxussansregular";
 String eudoxussansmedium="Eudoxussansmedium";
 String eudoxussansbold="Eudoxussansbold";
+String larsseitMed="LarsseitMed";
+String tiemposMed="TiemposMed";

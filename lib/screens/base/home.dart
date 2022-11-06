@@ -46,6 +46,7 @@ class Home extends StatelessWidget {
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
+            padding: EdgeInsets.only(bottom: screenwidth*0.06),
             width: screenwidth,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -64,6 +65,7 @@ class Home extends StatelessWidget {
                 ),
                 homecontroller.progresstoprow(context),
                 homecontroller.progressbarcontainer(context),
+                homecontroller.avgdailypoints(context),
               ],
             ),
           ),
